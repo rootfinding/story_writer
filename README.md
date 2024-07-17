@@ -1,4 +1,3 @@
-cat << EOT > README.md
 # Hero Journey Writer
 
 ## Descripción
@@ -94,4 +93,3 @@ Las contribuciones son bienvenidas. Por favor, abre un issue para discutir cambi
 
 ## Licencia
 [MIT](https://choosealicense.com/licenses/mit/)
-EOT
