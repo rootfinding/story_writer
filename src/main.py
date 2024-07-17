@@ -1,19 +1,19 @@
 import os
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
-from src.ui.cli import start_cli
-from src.graph.hero_journey_graph import create_hero_journey_graph
+from langchain_anthropic import ChatAnthropic
+from ui.cli import start_cli
+from graph.hero_journey_graph import create_hero_journey_graph
 
 # Load environment variables
 load_dotenv()
 
 def main():
-    # Initialize OpenAI API
-    openai_api_key = os.getenv("OPENAI_API_KEY")
-    if not openai_api_key:
-        raise ValueError("Please set the OPENAI_API_KEY environment variable")
+    # Initialize Anthropic API
+    anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
+    if not anthropic_api_key:
+        raise ValueError("Please set the ANTHROPIC_API_KEY environment variable")
     
-    llm = ChatOpenAI(api_key=openai_api_key)
+    llm = ChatAnthropic(model="claude-3-opus-20240229", api_key=anthropic_api_key)
     
     # Create the hero's journey graph
     graph = create_hero_journey_graph(llm)

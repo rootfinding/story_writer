@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: hero-journey-writer
+Version: 0.1
+Requires-Dist: langgraph
+Requires-Dist: langchain
+Requires-Dist: langchain_openai
+Requires-Dist: python-dotenv
