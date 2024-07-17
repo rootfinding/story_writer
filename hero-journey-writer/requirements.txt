@@ -1,0 +1,5 @@
+langgraph
+langchain
+langchain_anthropic
+python-dotenv
+pinecone-client
