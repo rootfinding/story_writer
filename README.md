@@ -11,7 +11,7 @@ Hero Journey Writer es una aplicación interactiva de narración basada en el co
 - Eventos aleatorios que añaden variedad a la narrativa
 
 ## Estructura del Proyecto
-\`\`\`
+```
 hero-journey-writer/
 ├── src/
 │   ├── main.py
@@ -29,10 +29,10 @@ hero-journey-writer/
 │       └── vector_store.py
 ├── .env
 └── README.md
-\`\`\`
+```
 
 ## Diagrama de Funcionamiento
-\`\`\`mermaid
+```mermaid
 graph TD
     A[Inicio] --> B[Crear Grafo del Viaje del Héroe]
     B --> C[Inicializar Estado del Juego]
@@ -47,7 +47,7 @@ graph TD
     J --> K{Fin del Viaje?}
     K -->|No| D
     K -->|Sí| L[Fin]
-\`\`\`
+```
 
 ## Requisitos
 - Python 3.10+
@@ -55,29 +55,29 @@ graph TD
 
 ## Configuración
 1. Clona el repositorio:
-   \`\`\`
+   ```
    git clone https://github.com/tu-usuario/hero-journey-writer.git
    cd hero-journey-writer
-   \`\`\`
+   ```
 
 2. Instala las dependencias:
-   \`\`\`
+   ```
    pip install -r requirements.txt
-   \`\`\`
+   ```
 
-3. Configura las variables de entorno en un archivo \`.env\`:
-   \`\`\`
+3. Configura las variables de entorno en un archivo `.env`:
+   ```
    ANTHROPIC_API_KEY=tu_clave_api_de_anthropic
    OPENAI_API_KEY=tu_clave_api_de_openai
    PINECONE_API_KEY=tu_clave_api_de_pinecone
    PINECONE_ENVIRONMENT=tu_entorno_de_pinecone
-   \`\`\`
+   ```
 
 ## Ejecución
 Para iniciar el juego, ejecuta:
-\`\`\`
+   ```
 python -m src.main
-\`\`\`
+   ```
 
 ## Cómo Funciona
 1. El juego inicia creando un grafo que representa las etapas del Viaje del Héroe.
