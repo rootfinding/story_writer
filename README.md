@@ -55,29 +55,29 @@ graph TD
 
 ## Configuración
 1. Clona el repositorio:
-   ```bash
+```bash
    git clone https://github.com/tu-usuario/hero-journey-writer.git
    cd hero-journey-writer
-   ```
+```
 
 2. Instala las dependencias:
-   ```bash
+```bash
    pip install -r requirements.txt
-   ```
+```
 
 3. Configura las variables de entorno en un archivo `.env`:
-   ```bash
+```bash
    ANTHROPIC_API_KEY=tu_clave_api_de_anthropic
    OPENAI_API_KEY=tu_clave_api_de_openai
    PINECONE_API_KEY=tu_clave_api_de_pinecone
    PINECONE_ENVIRONMENT=tu_entorno_de_pinecone
-   ```
+```
 
 ## Ejecución
 Para iniciar el juego, ejecuta:
-   ```bash
+```bash
 python -m src.main
-   ```
+```
 
 ## Cómo Funciona
 1. El juego inicia creando un grafo que representa las etapas del Viaje del Héroe.
