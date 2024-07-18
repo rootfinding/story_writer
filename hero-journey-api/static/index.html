@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero's Journey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        #story,
+        #user-input {
+            margin-bottom: 20px;
+        }
+
+        #user-input input {
+            width: 70%;
+            padding: 5px;
+        }
+
+        #user-input button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hero's Journey</h1>
+    <div id="story"></div>
+    <div id="user-input">
+        <input type="text" id="input-text" placeholder="Tu respuesta...">
+        <button onclick="sendResponse()">Enviar</button>
+    </div>
+    <script>
+        let currentStage = 'start';
+        let stages = ['start', 'journey', 'challenge', 'return'];
+        let currentStageIndex = 0;
+
+        async function startJourney() {
+            const response = await fetch('/wizard/start', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    protagonist_desire: "To find inner peace",
+                    helper_description: "A wise old sage"
+                }),
+            });
+            const data = await response.json();
+            document.getElementById('story').innerHTML += `<p>${data.challenge}</p>`;
+        }
+
+        async function sendResponse() {
+            const input = document.getElementById('input-text').value;
+            document.getElementById('input-text').value = '';
+
+            const response = await fetch('/wizard/evaluate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ response: input, stage: currentStage }),
+            });
+            const data = await response.json();
+            document.getElementById('story').innerHTML += `<p>Tu respuesta: ${input}</p>`;
+            document.getElementById('story').innerHTML += `<p>Evaluación: ${JSON.stringify(data.result)}</p>`;
+
+            // Avanzar a la siguiente etapa
+            currentStageIndex++;
+            if (currentStageIndex < stages.length) {
+                currentStage = stages[currentStageIndex];
+                document.getElementById('story').innerHTML += `<p>${data.next_challenge}</p>`;
+            } else {
+                document.getElementById('story').innerHTML += `<p>¡Has completado tu viaje!</p>`;
+                document.getElementById('user-input').style.display = 'none';
+            }
+        }
+
+        window.onload = startJourney;
+    </script>
+</body>
+
+</html>
