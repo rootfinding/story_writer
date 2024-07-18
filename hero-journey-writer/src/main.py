@@ -1,13 +1,13 @@
 import random
 from dotenv import load_dotenv
-from .graph.hero_journey_graph import create_hero_journey_graph, HeroJourneyState
-from .utils.option_generator import generate_options
-from .utils.decision_evaluator import evaluate_decision
-from .utils.character_encounters import character_interaction, process_hero_response
-from .utils.dynamic_events import generate_dynamic_event, process_event_choice
-from .utils.story_generator import generate_story_segment
-from .models.character import Character
-from .database.vector_store import initialize_vector_store
+from src.graph.hero_journey_graph import create_hero_journey_graph, HeroJourneyState
+from src.utils.option_generator import generate_options
+from src.utils.decision_evaluator import evaluate_decision
+from src.utils.character_encounters import character_interaction, process_hero_response
+from src.utils.dynamic_events import generate_dynamic_event, process_event_choice
+from src.utils.story_generator import generate_story_segment
+from src.models.character import Character
+from src.database.vector_store import initialize_vector_store
 
 load_dotenv()
 
@@ -29,12 +29,17 @@ def main_game_loop():
     
     print(f"Bienvenido al viaje de {state['hero_name']}!")
     
-    while state['current_stage'] != "freedom_to_live":
+    while True:
         state = graph.invoke(state)
         print(f"\n--- Etapa actual: {state['current_stage'].replace('_', ' ').title()} ---")
         
         story_segment = generate_story_segment(state['current_stage'], state['context'])
         print(story_segment)
+        
+        if state['current_stage'] == "freedom_to_live":
+            print("\n¡El viaje del héroe ha concluido!")
+            print_final_story(state)
+            break
         
         if random.choice([True, False]):
             handle_dynamic_event(state)
@@ -45,9 +50,6 @@ def main_game_loop():
         
         display_character_insights(state)
         update_context(state)
-    
-    print("\n¡El viaje del héroe ha concluido!")
-    print_final_story(state)
 
 def handle_dynamic_event(state):
     event, event_options = generate_dynamic_event(state)

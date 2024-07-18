@@ -25,9 +25,24 @@ def generate_dynamic_event(state):
     Opción 2: [Segunda opción de respuesta]
     """
     
-    response = llm.invoke(prompt).content
-    event, *options = response.split("\n")
-    return event.split(": ")[1], [opt.split(": ")[1] for opt in options]
+    response = llm.invoke(prompt).content.strip()
+    lines = response.split('\n')
+    
+    event = ""
+    options = []
+    
+    for line in lines:
+        if line.startswith("Evento:"):
+            event = line.split(":", 1)[1].strip()
+        elif line.startswith("Opción"):
+            options.append(line.split(":", 1)[1].strip())
+    
+    if not event or len(options) < 2:
+        # Si no se pudo extraer el evento o las opciones correctamente, generamos un evento genérico
+        event = "Un evento inesperado ocurre en el camino del héroe."
+        options = ["Enfrentar el desafío directamente", "Buscar una solución alternativa"]
+    
+    return event, options
 
 def process_event_choice(state, event, choice):
     prompt = f"""
@@ -44,10 +59,9 @@ def process_event_choice(state, event, choice):
     Proporciona un breve resumen de las consecuencias en 2-3 oraciones.
     """
     
-    consequences = llm.invoke(prompt).content
+    consequences = llm.invoke(prompt).content.strip()
     
     # Actualizar el estado del juego basado en las consecuencias
-    # (Esto es un placeholder, deberías implementar la lógica real aquí)
     state['context'] += f" {consequences}"
     
     return consequences
