@@ -1,0 +1,109 @@
+Image Path,Description
+output_tiles\tile_4_5\tile_0_0.png,"The image is a map showing regions labeled ""Moonshae Isles,"" ""Sea of Moonshae,"" ""Norland,"" ""Omans Isle,"" ""Moray,"" and ""Gwyneth."" In addition, specific locations such as ""Rogarsheim,"" ""Iron Keep,"" ""Caer Moray,"" ""Dynnegall,"" ""Myrlach Vale,"" and ""Dernall Forest"" are marked. Here's the bounding box coordinates of each key feature in the format (x, y, dx, dy):
+
+1. **Norland**: (65, 55, 98, 60)
+2. **Moonshae Isles**: (140, 25, 142, 42)
+3. **Sea of Moonshae**: (145, 105, 140, 40)
+4. **Rogarsheim**: (90, 105, 65, 25)
+5. **Omans Isle**: (140, 210, 78, 50)
+6. **Iron Keep**: (130, 235, 155, 25)
+7. **Moray**: (60, 285, 80, 55)
+8. **Caer Moray**: (85, 300, 58, 9)
+9. **Farview**: (20, 340, 50, 10)
+10. **Barview**: (5, 370, 25"
+output_tiles\tile_4_5\tile_0_1.png,"This is an image of a fantasy map depicting a land with various regions, towns, and geographical features labeled. 
+
+Here are the bounding box coordinates in the (x, y, dx, dy) format for some of the prominent labels and features on this map:
+
+1. **Norland** 
+   (x: 44, y: 39, dx: 45, dy: 10)
+
+2. **Rogarshiem** 
+   (x: 44, y: 19, dx: 62, dy: 9)
+
+3. **Sea of Moonshae** 
+   (x: 156, y: 30, dx: 50, dy: 10)
+
+4. **Oman's Isle**
+   (x: 178, y: 141, dx: 67, dy: 18)
+
+5. **Iron Keep** 
+   (x: 228, y: 107, dx: 43, dy: 10)
+
+6. **Moray**
+   (x: 74, y: 234, dx: 33, dy: 10)
+
+7. **Farview** 
+   (x: 54, y: 211, dx: 33, dy: 10)
+
+8. **Caer Moray**
+   (x: 62, y: 200, dx: 50, dy: 9)
+
+9. **Dynnegall**
+   (x"
+output_tiles\tile_4_5\tile_1_0.png,"This is an image of a map depicting various islands and seas. Below are the bounding box coordinates for each major labeled feature on the map in the format (x, y, dx, dy):
+
+1. **Moonshae Isles**:
+   - Coordinates: (14, 13, 130, 25)
+
+2. **Sea of Moonshae**:
+   - Coordinates: (80, 110, 140, 25)
+
+3. **Fairheight Range**:
+   - Coordinates: (225, 55, 90, 25)
+
+4. **Dernall Forest**:
+   - Coordinates: (210, 150, 90, 25)
+
+5. **Alaron**:
+   - Coordinates: (245, 200, 55, 25)
+
+6. **Orlorn Keep**:
+   - Coordinates: (125, 170, 75, 25)
+
+7. **Omans Isle**:
+   - Coordinates: (110, 200, 90, 25)
+
+8. **Gwyneth**:
+   - Coordinates: (190, 290, 70, 35)
+
+9. **Myrloch Vale**:
+   - Coordinates: (190, 350, 100, 25)
+
+Note: The coordinates are approximate and calculated based on the visible labels and their placements within the image."
+output_tiles\tile_4_5\tile_1_1.png,"Here's a description of the image along with the bounding box coordinates for key features in the (x, y, dx, dy) format. Note that these coordinates are approximate:
+
+1. **Sea of Moonshae**
+   - Coordinates: (50, 20, 150, 50)
+
+2. **Alaron**
+   - Coordinates: (220, 50, 80, 150)
+
+3. **Gwynneth**
+   - Coordinates: (70, 120, 150, 150)
+
+4. **Snowdown**
+   - Coordinates: (250, 230, 110, 100)
+
+5. **Oman's Isle**
+   - Coordinates: (30, 90, 80, 80)
+
+6. **Dermal Forest**
+   - Coordinates: (240, 80, 50, 50)
+
+7. **Fairheight Range**
+   - Coordinates: (320, 40, 80, 40)
+
+8. **Iron Keep**
+   - Coordinates: (65, 100, 40, 20)
+
+9. **Myrloch Vale**
+   - Coordinates: (140, 180, 80, 40)
+
+10. **Caer Westphal**
+    - Coordinates: (280, 310, 60, 20)
+
+11. **Caer Corwell**
+    - Coordinates: (130, 250, 60, 30)
+
+These features are part of a fictional map, and"
