@@ -22,3 +22,5 @@ def print_summary(final_state: Dict) -> None:
         print("🎊 El héroe ha superado los desafíos del Mago Blanco y continúa su aventura en el bosque mágico.")
     else:
         print("🔁 El héroe no ha superado todos los desafíos del Mago Blanco y debe buscar otro camino en el bosque.")
+
+
