@@ -11,15 +11,5 @@ class AgentState(TypedDict):
     story: List[str]
     desafios_resueltos: int
     puzzle_solution: str
-
-
-
-from abc import ABC, abstractmethod
-
-class Agente(ABC):
-    def __init__(self, nombre):
-        self.nombre = nombre
-
-    @abstractmethod
-    def actuar(self, estado):
-        pass
+    tipo_desafio: str
+    evaluacion: str

@@ -1,95 +1,62 @@
-import os
-from typing import Dict
-from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
-from sqlalchemy import create_engine
-from intro_writer.scenary import generate_scenary
 from intro_writer.agents_def import AgentState
-from intro_writer.human_interaction import print_summary
-from intro_writer.flow_graph import flow_graph
-from langchain_core.runnables import RunnableConfig
-import logging
+from intro_writer.flow_graph import make_graph
+from intro_writer.human_interaction import human_response_node
+import os
+from dotenv import load_dotenv
+from langchain.globals import set_debug
 
 print(os.getcwd())
 
-# Configurar logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
-
-def load_config() -> None:
+def load_config():
     """Load environment variables and set up configuration."""
     load_dotenv()
     openai_api_key = os.getenv("OPENAI_API_KEY")
     if not openai_api_key:
         raise ValueError("OPENAI_API_KEY not found in environment variables")
     os.environ["OPENAI_API_KEY"] = openai_api_key
+    set_debug(True)
 
-
-
-def initialize_state() -> Dict:
+def initialize_state() -> AgentState:
     """Initialize the game state."""
-    return {
-        "max_desafios": 5,
-        "cantidad_desafios": 0,
-        "desafios_resueltos": 0,
-        "story": [],
-        "puzzle_solution": "N/A"
-    }
+    return AgentState(
+        escenario="",
+        heroe="Aventurero",
+        caramelo="Gominola mágica",
+        cantidad_desafios=0,
+        max_desafios=5,
+        desafio="",
+        respuesta="",
+        story=[],
+        desafios_resueltos=0,
+        puzzle_solution="",
+        tipo_desafio="",
+        evaluacion=""
+    )
 
-def get_user_input() -> Dict[str, str]:
-    """Get user input for hero name and favorite candy."""
-    return {
-        "heroe": input("¿Cuál es el nombre de tu héroe? "),
-        "caramelo": input("¿Cuál es tu dulce favorito? ")
-    }
+def print_summary(final_state: AgentState):
+    """Print the final game summary."""
+    print("\n📜 Resumen final:")
+    print(f"Historia: {final_state['story'][0]}")
+    print(f"Desafíos enfrentados: {final_state['cantidad_desafios']}")
+    print(f"Desafíos resueltos: {final_state['desafios_resueltos']}")
+    if final_state['desafios_resueltos'] >= 2:
+        print("🎊 El héroe ha superado los desafíos del Mago Blanco y continúa su aventura en el bosque mágico.")
+    else:
+        print("🔁 El héroe no ha superado todos los desafíos del Mago Blanco y debe buscar otro camino en el bosque.")
 
-def setup_database():
-    """Set up database connection."""
-    db_url = os.getenv("DATABASE_URL", "postgresql://user:password@langgraph-postgres/dbname")
-    try:
-        engine = create_engine(db_url)
-        # Puedes agregar aquí lógica adicional para verificar la conexión si lo deseas
-        logger.info("Database connection established successfully")
-        return engine
-    except Exception as e:
-        logger.error(f"Error connecting to database: {e}")
-        raise
-
-def make_graph(config: RunnableConfig):
-    """
-    Create and return the graph based on configuration.
-    This function is required for LangGraph to build the graph dynamically.
-    """
-    logger.info("Building graph with config: %s", config)
-    return flow_graph()
-
-def run_game(state: Dict) -> Dict:
-    """Run the main game loop."""
-    graph = make_graph({})  # Puedes pasar configuración aquí si es necesario
-    try:
-        return graph.invoke(state)
-    except Exception as e:
-        logger.error(f"Error during game execution: {e}")
-        raise
-
-def main() -> None:
-    """Main function to run the game."""
+def main():
     try:
         load_config()
-        engine = setup_database()
         state = initialize_state()
-        state['escenario'] = generate_scenary()
-        state.update(get_user_input())
-
+        
         print("\n🧙‍♂️ ¡Bienvenido a la aventura en el bosque mágico! 🧙‍♂️")
-        final_state = run_game(state)
+        graph = make_graph()
+        final_state = graph.invoke(state)
+        
         print_summary(final_state)
     except Exception as e:
-        logger.error(f"Error during game setup or execution: {e}")
+        print(f"Error durante la configuración o ejecución del juego: {e}")
         print("Lo siento, ocurrió un error inesperado. Por favor, intenta de nuevo más tarde.")
 
 if __name__ == "__main__":
     main()
-    
-    
-    
