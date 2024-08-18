@@ -1,7 +1,9 @@
 {
-    "dependencies": ["."],
+    "dependencies": [
+        "."
+    ],
     "graphs": {
-        "story_writer": "intro_writer.main:make_graph"
+        "story_writer": "intro_writer.flow_graph:make_graph"
     },
     "env": "./.env"
 }
