@@ -5,10 +5,10 @@ from langchain_openai import ChatOpenAI
 from sqlalchemy import create_engine
 from intro_writer.scenary import generate_scenary
 from intro_writer.agents_def import AgentState
-from intro_writer.human_interaction import print_summary
 from intro_writer.flow_graph import flow_graph
 from langchain_core.runnables import RunnableConfig
 import logging
+
 
 print(os.getcwd())
 
@@ -29,7 +29,7 @@ def load_config() -> None:
 def initialize_state() -> Dict:
     """Initialize the game state."""
     return {
-        "max_desafios": 5,
+        "max_desafios": 2,
         "cantidad_desafios": 0,
         "desafios_resueltos": 0,
         "story": [],
@@ -55,22 +55,7 @@ def setup_database():
         logger.error(f"Error connecting to database: {e}")
         raise
 
-def make_graph(config: RunnableConfig):
-    """
-    Create and return the graph based on configuration.
-    This function is required for LangGraph to build the graph dynamically.
-    """
-    logger.info("Building graph with config: %s", config)
-    return flow_graph()
 
-def run_game(state: Dict) -> Dict:
-    """Run the main game loop."""
-    graph = make_graph({})  # Puedes pasar configuración aquí si es necesario
-    try:
-        return graph.invoke(state)
-    except Exception as e:
-        logger.error(f"Error during game execution: {e}")
-        raise
 
 def main() -> None:
     """Main function to run the game."""
@@ -81,9 +66,8 @@ def main() -> None:
         state['escenario'] = generate_scenary()
         state.update(get_user_input())
 
-        print("\n🧙‍♂️ ¡Bienvenido a la aventura en el bosque mágico! 🧙‍♂️")
-        final_state = run_game(state)
-        print_summary(final_state)
+        print("\n ¡Bienvenido a la aventura!")
+        final_state = flow_graph().invoke(state)
     except Exception as e:
         logger.error(f"Error during game setup or execution: {e}")
         print("Lo siento, ocurrió un error inesperado. Por favor, intenta de nuevo más tarde.")

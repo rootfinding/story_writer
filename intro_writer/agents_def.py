@@ -11,6 +11,7 @@ class AgentState(TypedDict):
     story: List[str]
     desafios_resueltos: int
     puzzle_solution: str
+    tipo_desafio: str
 
 
 

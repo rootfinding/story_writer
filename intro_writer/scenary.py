@@ -1,11 +1,15 @@
 import pandas as pd
 import random
+import os
 
 def generate_scenary():
     try:
-        df = pd.read_csv('scenario_generator/single_tile_descriptions_alt_01.csv')
+        # Construct the correct path
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        parent_dir = os.path.dirname(current_dir)
+        path = os.path.join(parent_dir, 'scenario_generator', 'output_csv', 'single_tile_descriptions_1.csv')
+        df = pd.read_csv(path)
         row_random = random.randint(0, len(df)-1)
-        return df["description"].iloc[row_random]
+        return df["Description"].iloc[row_random]
     except Exception as e:
         print(f"Error al leer el archivo CSV: {e}")
-        return "Un aventurero se encuentra en un bosque misterioso"  # Escenario por defecto en caso de error
